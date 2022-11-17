@@ -1,9 +1,17 @@
 const express = require("express");
 const createError = require("http-errors");
 const morgan = require("morgan");
+
 require("dotenv").config();
 
+const cors = require("cors");
+
 const app = express();
+const corsOptions = {
+  origin: process.env.APP_FRONT_END_URL,
+  credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
